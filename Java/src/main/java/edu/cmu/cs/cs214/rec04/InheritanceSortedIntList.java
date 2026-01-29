@@ -17,7 +17,6 @@ package edu.cmu.cs.cs214.rec04;
 public class InheritanceSortedIntList extends SortedIntList {
    private int totalAdded = 0;
 
-
    public int getTotalAdded() {
        return totalAdded;
    }
@@ -25,27 +24,22 @@ public class InheritanceSortedIntList extends SortedIntList {
 
    @Override
    public boolean add(int num) {
-       totalAdded++;
+       totalAdded += 1;
        return super.add(num);
    }
 
 
    @Override
    public boolean addAll(IntegerList otherList) {
-       totalAdded += otherList.size();
-       return super.addAll(otherList);
+        boolean success = false;
+        for (int i = 0; i < otherList.size(); i++)
+        {
+            totalAdded += 1;   
+            success |= super.add(otherList.get(i));
+        }
+
+        return success;
    }
   
 }
-
-
-
-
-
-
-// InheritanceSortedIntList should extend SortedIntList.
-// The SortedIntList contains two methods that add elements, add and addAll.
-// You should override both of these methods to track how many elements have been added.
-// Make sure you check that getTotalAdded works with both add and addAll.
-
 
